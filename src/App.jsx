@@ -5,11 +5,27 @@ import Footer from './components/Footer/Footer'
 
 function App() {
   // const [count, setCount] = useState(0)
+  const cards = [
+    {
+      nome: "Jonatas",
+      idade: 29,
+      cargo: "Dev Pleno"
+    },
+    {
+      nome: "Larissa",
+      idade: 32,
+      cargo: "Dev Junior"
+    }
+  ]
 
   return (
     <>
       <Header />
-      <UserCard />
+      {
+        cards.map( item => {
+         return  <UserCard item={item} />
+        })
+      }
       <Footer />
     </>
   )

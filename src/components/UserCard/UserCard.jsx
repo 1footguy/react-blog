@@ -1,9 +1,11 @@
-export default function UserCard() {
+export default function UserCard(props) {
+    console.log(props);
+
     return (
         <div>
-            <h2>Jonatas Assis</h2>
-            <p>Idade: 29 anos</p>
-            <p>Cargo: Desenvolvedor Pleno</p>
+            <h3>{props.item.nome}</h3>
+            <p>Idade: {props.item.idade}</p>
+            <p>Cargo: {props.item.cargo}</p> 
         </div>
     )
 }
