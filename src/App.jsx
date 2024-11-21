@@ -1,32 +1,22 @@
-// import { useState } from 'react'
-import Header from './components/Header/Header'
-import UserCard from './components/UserCard/UserCard'
-import Footer from './components/Footer/Footer'
-
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Home from "./pages/Home/Home"
+import Users from "./pages/Users/Users"
+import Sac from "./pages/Sac/Sac"
+import About from "./pages/About/About"
 function App() {
-  // const [count, setCount] = useState(0)
-  const cards = [
-    {
-      nome: "Jonatas",
-      idade: 29,
-      cargo: "Dev Pleno"
-    },
-    {
-      nome: "Larissa",
-      idade: 32,
-      cargo: "Dev Junior"
-    }
-  ]
+
 
   return (
     <>
-      <Header />
-      {
-        cards.map( item => {
-         return  <UserCard item={item} />
-        })
-      }
-      <Footer />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home/>} />
+          <Route path="/users" element={<Users/>} />
+          <Route path="/sac" element={<Sac/>} />
+          <Route path="/about" element={<About/>} />
+          <Route path="*" element={<h1>Error 404: Not found</h1>}/>
+        </Routes>
+      </BrowserRouter>
     </>
   )
 }
