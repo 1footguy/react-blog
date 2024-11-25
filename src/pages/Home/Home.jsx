@@ -1,7 +1,6 @@
 import Footer from "../../components/Footer/Footer"
 import Header from "../../components/Header/Header"
 import Posts from "../../components/Post/Posts"
-// import "../../assets/styles.css";
 
 
 
@@ -52,7 +51,7 @@ export default function Home() {
             <h1 style={{textAlign: 'center'}}>Home</h1>
             {posts.map(post => {
                 return(
-                <div key={post.titulo} className="post">
+                <div key={post.titulo}>
                     <Posts {...post}/>
                 </div>
                 )

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../../assets/styles.css";
 
-
 export default function Posts({ titulo, conteudo, autor, imagem }) {
     const [likes, setLikes] = useState(0);
     const [deslikes, setDeslikes] = useState(0);
