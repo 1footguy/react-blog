@@ -47,15 +47,11 @@ export default function Home() {
     return (
         <>
             <Header />
-            <main style={{ flexGrow: '1'}}>
+            <main style={{ flexGrow: '1', minWidth: '100vw'}}>
             <h1 style={{textAlign: 'center'}}>Home</h1>
-            {posts.map(post => {
-                return(
-                <div key={post.titulo}>
-                    <Posts {...post}/>
-                </div>
-                )
-            })}
+            
+                    <Posts />
+       
             </main>
             <Footer />            
         </>

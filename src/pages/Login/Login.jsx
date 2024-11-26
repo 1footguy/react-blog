@@ -15,7 +15,7 @@ export default function Login() {
     <>
     <Header/>
     <main style={{flexGrow: 1}}>
-        <form onSubmit={handleSubmit(enviarForm)}>
+        <form onSubmit={handleSubmit(enviarForm)} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100vw', height: '80vh', justifyContent: 'center'}}>
             <section>
                 <label htmlFor="email">Email </label>
                 <input type="email" id="email" autoComplete="off" {...register('email', {
