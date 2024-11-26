@@ -34,8 +34,38 @@ async function updateUser(id, data) {
     const document = doc(users, id);
     await updateDoc(document, data)
 }
+// CRUD Posts
+
+async function savePost(data) {
+    const posts = collection(db, "posts");
+    await addDoc(posts, data);
+}
+
+async function getPosts() {
+    const posts = collection(db, "posts");
+    const resultados = await getDocs(posts);
+    const objetos = [];
+
+    resultados.forEach(doc => {
+        const post = doc.data();
+        post.id = doc.id;
+        objetos.push(post);
+    });
+    return objetos;
+} 
+
+async function updatePost(id, data) {
+    const posts = collection(db, "posts");
+    const document = doc(posts, id);
+    await updateDoc(document, data);
+}
+
+async function deletePost(id) {
+    const posts = collection(db, "posts");
+    const document = doc(posts, id);
+    await deleteDoc(document);
+}
 
 
 
-
-export { saveUser, getUsers, updateUser, deleteUser}
+export { saveUser, getUsers, updateUser, deleteUser, savePost, getPosts, deletePost, updatePost}
