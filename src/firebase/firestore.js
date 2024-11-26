@@ -1,26 +1,41 @@
-import { useEffect } from "react";
-import app from "./firebase.config";
-import { addDoc, collection, getDocs, getFirestore } from 'firebase/firestore'
+import app from "../../firebase.config";
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from 'firebase/firestore'
 
 
 const db = getFirestore(app);
 
-async function save (dados){
-    const usuarios = collection(db, "usuarios")
-    await addDoc(usuarios, dados);
-    console.log("Usuario criado");
+// CRUD Users
+
+async function saveUser(data) {
+    const users = collection(db, "users")
+    await addDoc(users, data);
 }
 
-async function find (){
-    const usuarios = collection(db, "usuarios");
-    const resultados = await getDocs(usuarios);
+async function getUsers() {
+    const users = collection(db, "users");
+    const resultados = await getDocs(users);
     const objetos = [];
     resultados.forEach(doc => {
-        const usuario = doc.data();
-        usuario.id = doc.id;
-        objetos.push(usuario);
+        const user = doc.data();
+        user.id = doc.id;
+        objetos.push(user);
     });
     return objetos;
 }
 
-export { save, find}
+async function deleteUser(id) {
+    const users = collection(db, "users");
+    const document = doc(users, id);
+    await deleteDoc(document);
+}
+
+async function updateUser(id, data) {
+    const users = collection(db, "users");
+    const document = doc(users, id);
+    await updateDoc(document, data)
+}
+
+
+
+
+export { saveUser, getUsers, updateUser, deleteUser}
