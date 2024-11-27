@@ -1,4 +1,4 @@
-import app from "../../firebase.config";
+import app from "./firebase.config";
 import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, updateDoc } from 'firebase/firestore'
 
 
@@ -61,9 +61,7 @@ async function updatePost(id, data) {
 }
 
 async function deletePost(id) {
-    const posts = collection(db, "posts");
-    const document = doc(posts, id);
-    await deleteDoc(document);
+    await deleteDoc(doc(db,"posts", id));
 }
 
 

@@ -49,9 +49,7 @@ export default function Home() {
             <Header />
             <main style={{ flexGrow: '1', minWidth: '100vw'}}>
             <h1 style={{textAlign: 'center'}}>Home</h1>
-            
-                    <Posts />
-       
+            <Posts />
             </main>
             <Footer />            
         </>
