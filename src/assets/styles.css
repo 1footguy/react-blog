@@ -15,7 +15,7 @@
     background-color: rgb(40, 161, 111);
     border-radius: 20px;
     width: 30vw;
-    height: 30vh;
+    height: 60vh;
     padding: 15px;
 }
 
@@ -24,6 +24,11 @@
     display: flex;
     flex-direction: column;
 
+}
+
+.post img{
+    height: 20vh;
+    border-radius: 15px;
 }
 
 #postButton{
