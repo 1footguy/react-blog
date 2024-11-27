@@ -28,8 +28,10 @@ export default function Posts() {
     async function editPost(id){
         const title = window.prompt("Digite o novo título:")
         const content = window.prompt("Digite o novo conteúdo:")
+        const author = window.prompt("Digite o novo author:")
+        const img = window.prompt("Digite a URL da nova Imagem:")
         if (title && content) {
-            const data = {title, content}
+            const data = {title, content, author, img}
             await updatePost(id, data);
             findPosts();
         }
@@ -57,6 +59,12 @@ export default function Posts() {
                         <label htmlFor="content">Content</label>
                         <input type="text" id="content" {...register("content")} />
     
+                        <label htmlFor="author">Author</label>
+                        <input type="text" id="author" {...register("author")} />
+    
+                        <label htmlFor="img">Img(URL)</label>
+                        <input type="text" id="img" {...register("img")} />
+    
                         <button type="submit">Postar</button>
                     </form>
                 )}
@@ -67,7 +75,9 @@ export default function Posts() {
                                 <li className="post" key={post.id}>
                                     <p>{post.id}</p>
                                     <h2>{post.title}</h2>
+                                    <img src={post.img} />
                                     <p>{post.content}</p>
+                                    <p>{post.author}</p>
                                     <div className="postButtons">
                                         <button type="button" onClick={() => editPost(post.id)}>Editar</button>
                                         <button type="button" onClick={() => removePost(post.id)}>Apagar</button>   
