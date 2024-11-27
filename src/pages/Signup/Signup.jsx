@@ -3,6 +3,8 @@ import { deleteUser, getUsers, saveUser, updateUser } from '../../firebase/fires
 import { useForm } from 'react-hook-form'
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
+import { signUp } from '../../firebase/authentication';
+import { redirect } from 'react-router-dom';
 
 export default function Signup(){
     
@@ -11,10 +13,17 @@ export default function Signup(){
 
     const { handleSubmit, register, reset } = useForm();
     
-    async function newUser(data) {
-        await saveUser(data);
+    async function newUser({email, nome, password}) {
+        const user = await signUp(email, password);
+        await saveUser({
+            email, 
+            nome,
+            password,
+            authId: user.uid
+        });
         reset();
         findUsers();
+        redirect("/login");
     } 
 
     async function findUsers() {
@@ -70,16 +79,16 @@ export default function Signup(){
                     </tbody>
                 </table>
                 <label htmlFor='username'>Nome </label>
-                <input type="text" id="username" {...register("nome")} />
+                <input type="text" id="username" {...register("nome")} autoComplete="off" />
                 
                 <label htmlFor='email'>Email </label>
-                <input type="email" id="email" {...register("email")}/>
+                <input type="email" id="email" {...register("email")} autoComplete="off" />
 
                 <label htmlFor='password'>Senha </label>
                 <input type="password" id="password" {...register("password")}/>
 
 
-                <button>Criar</button>
+                <button type='submit'>Criar</button>
             </form>
         </main>
         <Footer />

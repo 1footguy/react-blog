@@ -1,15 +1,41 @@
 import { useForm } from "react-hook-form";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
+import { login, loginGoogle } from "../../firebase/authentication";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
 
     const {handleSubmit, register} = useForm();
+    const navigate = useNavigate();
 
-    function enviarForm(dados){
-        console.log(dados);
+    async function enviarForm({email, senha}){
+        try {
+            await login(email, senha);
+            window.alert("logado");
+            navigate('/');        
+        } catch (error) {
+            if (error.code == "auth/invalid-credential") {
+                alert("Email ou senha inválidos")
+            } else {
+                alert("Algo deu errado.")
+            }
+            console.error({...error});
+            
+        }
     }
-    
+
+    async function entrarGoogle(){
+        try {
+            await loginGoogle();
+            alert("Login google bem sucedido!")
+            navigate("/");
+        } catch (error) {
+            console.error(error);
+            alert("Algo deu errado");
+            
+        }
+    }
 
   return (
     <>
@@ -28,11 +54,12 @@ export default function Login() {
                 <label htmlFor="senha">Senha </label>
                 <input type="password" id="senha" {...register('senha', {
                     required: true,
-                    minLength: 8
+                    minLength: 6
                 })}/>
 
             </section>
             <button type="submit">Enviar</button>
+            <button style={{width:'160px'}} type="button" onClick={entrarGoogle}>Entrar com Google</button>
         </form>
     </main>
     <Footer />
