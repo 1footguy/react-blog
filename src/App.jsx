@@ -5,11 +5,13 @@ import Sac from "./pages/Sac/Sac"
 import About from "./pages/About/About"
 import Login from "./pages/Login/Login"
 import Signup from "./pages/Signup/Signup"
+import { AuthProvider } from "./context/Auth"
 function App() {
 
 
   return (
     <>
+    <AuthProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home/>} />
@@ -21,6 +23,7 @@ function App() {
           <Route path="*" element={<h1>Error 404: Not found</h1>}/>
         </Routes>
       </BrowserRouter>
+      </AuthProvider>
     </>
   )
 }
