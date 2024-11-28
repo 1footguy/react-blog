@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { logout } from "../../firebase/authentication";
+import { useAuth } from "../../context/Auth";
 
 export default function Header() {
+
+    const { autenticado } = useAuth();
+
     return (
     <nav style={{display: "flex", justifyContent: 'space-around'}}>
         <h1 style={{marginLeft: "40px"}}>Mini Blog</h1>
@@ -14,15 +19,25 @@ export default function Header() {
             <li>
                 <Link to="/login">Login</Link>
             </li>
-            <li>
-                <Link to="/signup">Signup</Link>
-            </li>
-            <li>
-                <Link to="/about">About</Link>
-            </li>
+            {(!autenticado) ? (
+                <>
+                <li>
+                    <Link to="/signup">Signup</Link>
+                </li>
+                <li>
+                    <Link to="/about">About</Link>
+                </li>
+                </>
+            ) : (
+            <>
             <li>
                 <Link to="/sac">SAC</Link>
             </li>
+            <li>
+                <button onClick={() => logout()}>Sair</button>
+            </li>
+            </>
+        )}
         </ul>
     </nav>
     )

@@ -3,16 +3,19 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import { login, loginGoogle } from "../../firebase/authentication";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/Auth";
 
 export default function Login() {
 
     const {handleSubmit, register} = useForm();
     const navigate = useNavigate();
 
+    const { setAutenticado } = useAuth();
+
     async function enviarForm({email, senha}){
         try {
             await login(email, senha);
-            window.alert("logado");
+            setAutenticado(true);
             navigate('/');        
         } catch (error) {
             if (error.code == "auth/invalid-credential") {
@@ -20,7 +23,7 @@ export default function Login() {
             } else {
                 alert("Algo deu errado.")
             }
-            console.error({...error});
+            console.error(error);
             
         }
     }
@@ -28,12 +31,11 @@ export default function Login() {
     async function entrarGoogle(){
         try {
             await loginGoogle();
-            alert("Login google bem sucedido!")
+            setAutenticado(true);
             navigate("/");
         } catch (error) {
             console.error(error);
             alert("Algo deu errado");
-            
         }
     }
 
@@ -41,7 +43,8 @@ export default function Login() {
     <>
     <Header/>
     <main style={{flexGrow: 1}}>
-        <form onSubmit={handleSubmit(enviarForm)} style={{display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100vw', height: '80vh', justifyContent: 'center'}}>
+        <h1 style={{justifySelf: 'center'}}>Acesse sua conta</h1>
+        <form onSubmit={handleSubmit(enviarForm)} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
             <section>
                 <label htmlFor="email">Email </label>
                 <input type="email" id="email" autoComplete="off" {...register('email', {
