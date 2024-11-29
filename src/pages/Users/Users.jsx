@@ -1,5 +1,4 @@
 import Footer from "../../components/Footer/Footer"
-import UserCard from "../../components/UserCard/UserCard"
 import Header from "../../components/Header/Header"
 import { deleteUser, getUsers, updateUser } from "../../firebase/firestore";
 import { useEffect, useState } from "react";
@@ -42,7 +41,7 @@ export default function Users(){
     return (
         <>
             <Header />
-            <main style={{flexGrow: 1, textAlign: 'center'}}>
+            <main style={{flexGrow: 1, textAlign: 'center', alignContent: 'center'}}>
             <table border={'2px'} style={{ margin: 'auto auto'}}>
                     <thead>
                         <tr>

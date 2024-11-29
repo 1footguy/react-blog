@@ -4,6 +4,7 @@ import Header from "../../components/Header/Header";
 import { login, loginGoogle } from "../../firebase/authentication";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/Auth";
+import { Button } from "react-bootstrap";
 
 export default function Login() {
 
@@ -42,27 +43,23 @@ export default function Login() {
   return (
     <>
     <Header/>
-    <main style={{flexGrow: 1}}>
-        <h1 style={{justifySelf: 'center'}}>Acesse sua conta</h1>
-        <form onSubmit={handleSubmit(enviarForm)} style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-            <section>
+    <main className="flex-grow-1 align-items-center d-flex flex-column justify-content-center">
+        <h1>Acesse sua conta</h1>
+        <form onSubmit={handleSubmit(enviarForm)} className="d-flex flex-column w-50 ">
                 <label htmlFor="email">Email </label>
                 <input type="email" id="email" autoComplete="off" {...register('email', {
                     required: true,
                     minLength: 8
                 })}/>
 
-            </section>
-            <section>
                 <label htmlFor="senha">Senha </label>
                 <input type="password" id="senha" {...register('senha', {
                     required: true,
                     minLength: 6
                 })}/>
 
-            </section>
-            <button type="submit">Enviar</button>
-            <button style={{width:'160px'}} type="button" onClick={entrarGoogle}>Entrar com Google</button>
+            <Button style={{width:'200px', alignSelf: 'center'}} type="submit" variant="outline-dark">Entrar</Button>
+            <Button style={{width:'200px', alignSelf: 'center'}} type="button" variant="dark" onClick={entrarGoogle}>Entrar com Google</Button>
         </form>
     </main>
     <Footer />

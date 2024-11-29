@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom"
 import Home from "./pages/Home/Home"
 import Users from "./pages/Users/Users"
@@ -6,6 +7,7 @@ import About from "./pages/About/About"
 import Login from "./pages/Login/Login"
 import Signup from "./pages/Signup/Signup"
 import { AuthProvider } from "./context/Auth"
+
 function App() {
 
 

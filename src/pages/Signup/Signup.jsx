@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { deleteUser, getUsers, saveUser, updateUser } from '../../firebase/firestore'
+import React from 'react'
+import { saveUser} from '../../firebase/firestore'
 import { useForm } from 'react-hook-form'
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
 import { signUp } from '../../firebase/authentication';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 export default function Signup(){
 
@@ -31,8 +32,9 @@ export default function Signup(){
     return(
         <>
         <Header/>
-        <main style={{display: 'flex', flexGrow: 1, justifyContent: 'center'}}>
-            <form onSubmit={handleSubmit(newUser)} style={{display: 'flex', flexDirection: 'column', width: '45%', justifyContent: 'center'}}>
+        <main style={{flexGrow: 1, justifyItems: 'center', alignContent: 'center'}}>
+            <h1>Cadastre-se</h1>
+            <form onSubmit={handleSubmit(newUser)} style={{display: 'flex', flexDirection: 'column' , width: '40%'}}>
                 <label htmlFor='username'>Nome </label>
                 <input type="text" id="username" {...register("nome")} autoComplete="off" />
                 
@@ -43,7 +45,7 @@ export default function Signup(){
                 <input type="password" id="password" {...register("password")}/>
 
 
-                <button type='submit'>Criar</button>
+                <Button type='submit'>Criar</Button>
             </form>
         </main>
         <Footer />

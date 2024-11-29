@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../../assets/styles.css";
 import { deletePost, getPosts, savePost, updatePost } from "../../firebase/firestore";
 import { useForm } from "react-hook-form";
+import { Button, Card, Form } from "react-bootstrap";
 
 export default function Posts() {
     const [posts, setPosts] = useState([]);
@@ -49,40 +50,48 @@ export default function Posts() {
             <p style={{textAlign: 'center'}}>Carregando...</p>
           ) : (
             <div className="postContainer">
-                 <button id="postButton" type="button" onClick={() => setFormVisible(!formVisible)}> {!formVisible ? 'Nova publicação' : 'Cancelar'} </button>
+                 <button id="postButton" type="button" onClick={() => setFormVisible(!formVisible)} style={{margin: '2rem 0'}}> {!formVisible ? 'Nova publicação' : 'Cancelar'} </button>
                 {(formVisible) && (
-                    <form className="form" onSubmit={handleSubmit(newPost)} >
-    
-                        <label htmlFor="title">Title</label>
-                        <input type="text" id="title" {...register("title")} />
-    
-                        <label htmlFor="content">Content</label>
-                        <input type="text" id="content" {...register("content")} />
-    
-                        <label htmlFor="author">Author</label>
-                        <input type="text" id="author" {...register("author")} />
-    
-                        <label htmlFor="img">Img(URL)</label>
-                        <input type="text" id="img" {...register("img")} />
-    
-                        <button type="submit">Postar</button>
-                    </form>
+                    <Form onSubmit={handleSubmit(newPost)} style={{width: '18rem', alignSelf: 'center', margin: '2rem 0'}}>
+                        <Form.Group className="mb-3" controlId="titulo">
+                            <Form.Label>Titulo</Form.Label>
+                            <Form.Control type="text" {...register('title')} />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="content">
+                            <Form.Label>Content</Form.Label>
+                            <Form.Control type="text" {...register('content')} />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="titulo">
+                            <Form.Label>IMG Url</Form.Label>
+                            <Form.Control type="text" {...register('img')} />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="titulo">
+                            <Form.Label>Titulo</Form.Label>
+                            <Form.Control type="text" {...register('author')} />
+                        </Form.Group>
+                        <Button type="submit" >Postar</Button>
+                    </Form>
                 )}
                
                 <ul className="posts">
                     {posts.map(post => {
                         return (
-                                <li className="post" key={post.id}>
-                                    <p>{post.id}</p>
-                                    <h2>{post.title}</h2>
-                                    <img src={post.img} />
-                                    <p>{post.content}</p>
-                                    <p>{post.author}</p>
+                            <Card style={{ width: '18rem'}} key={post.id}>
+                                <Card.Img variant="top" src={post.img} />
+                                <Card.Body>
+                                    <Card.Title>{post.title}</Card.Title>
+                                    <Card.Text>{post.content}</Card.Text>
+                                    <blockquote>
+                                        <footer className="blockquote-footer">
+                                           <cite title="Source Title">{post.author}</cite>
+                                        </footer>
+                                    </blockquote>
                                     <div className="postButtons">
-                                        <button type="button" onClick={() => editPost(post.id)}>Editar</button>
-                                        <button type="button" onClick={() => removePost(post.id)}>Apagar</button>   
+                                        <Button type="button" onClick={() => editPost(post.id)}>Editar</Button>
+                                        <Button type="button" onClick={() => removePost(post.id)}>Apagar</Button>   
                                     </div>
-                                </li>
+                                </Card.Body>
+                            </Card>
                         )
                     })}
                     </ul>
